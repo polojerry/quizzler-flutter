@@ -29,21 +29,19 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreList = [];
 
-  int questionNumber = 0;
-
   void nextQuestion() {
     setState(() {
-      questionNumber += 1;
+      quizBrain.nextQuestion();
     });
   }
 
-  void checkAnswer(bool answer) {
-    if (quizBrain.questionBank[questionNumber].answerBoolean == answer) {
+  /* void checkAnswer(bool answer) {
+    if (quizBrain.getQuestionAnswer(questionNumber) == answer) {
       print('Coreeeeeccct');
     } else {
       print("Wrongggggg");
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +55,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.questionBank[questionNumber].questionString,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -81,7 +79,6 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                checkAnswer(true);
                 nextQuestion();
               },
             ),
@@ -100,7 +97,6 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                checkAnswer(false);
                 nextQuestion();
               },
             ),
