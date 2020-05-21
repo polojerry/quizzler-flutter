@@ -32,12 +32,22 @@ class _QuizPageState extends State<QuizPage> {
     'A slug\'s blood is green.',
   ];
 
+  List<bool> answers = [false, true, true];
+
   int questionNumber = 0;
 
   void nextQuestion() {
     setState(() {
       questionNumber += 1;
     });
+  }
+
+  void checkAnswer(bool answer) {
+    if (answers[questionNumber] == answer) {
+      print('Coreeeeeccct');
+    } else {
+      print("Wrongggggg");
+    }
   }
 
   @override
@@ -76,6 +86,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                checkAnswer(true);
                 nextQuestion();
               },
             ),
@@ -94,6 +105,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                checkAnswer(false);
                 nextQuestion();
               },
             ),
