@@ -29,19 +29,22 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreList = [];
 
-  void nextQuestion() {
+  void checkAnswer(bool userAnswer) {
     setState(() {
+      if (quizBrain.getQuestionAnswer() == userAnswer) {
+        scoreList.add(Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+      } else {
+        scoreList.add(Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
+      }
       quizBrain.nextQuestion();
     });
   }
-
-  /* void checkAnswer(bool answer) {
-    if (quizBrain.getQuestionAnswer(questionNumber) == answer) {
-      print('Coreeeeeccct');
-    } else {
-      print("Wrongggggg");
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +82,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                nextQuestion();
+                checkAnswer(true);
               },
             ),
           ),
@@ -97,7 +100,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                nextQuestion();
+                checkAnswer(false);
               },
             ),
           ),
@@ -109,9 +112,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
